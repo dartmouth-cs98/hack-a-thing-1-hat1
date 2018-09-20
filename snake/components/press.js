@@ -102,9 +102,9 @@ class Press extends Component {
       }
 
       this.setState((previousState) => {
-        return { snek_counter: previousState.snek_counter + caseAdd + chimpAdd + sabotageAdd + ibvetAdd + securitizeAdd + djsolAdd + insidertradeAdd + makemarketAdd + mbsAdd + mercerAdd };
+        return { snek_counter: previousState.snek_counter + (caseAdd + chimpAdd + sabotageAdd + ibvetAdd + securitizeAdd + djsolAdd + insidertradeAdd + makemarketAdd + mbsAdd + mercerAdd) / 10 };
       });
-    }, 1000);
+    }, 100);
   }
 
   _onPressCounter() {
@@ -311,48 +311,51 @@ class Press extends Component {
           </TouchableOpacity>
         </View>
 
-        <View>
+        <View style={styles.countercontainer}>
           <Text style={styles.counter}>
-          Snekiness:
+            Snekiness:
             {' '}
-            {snek_counter}
-            {'\nSnek Rate: '}
+            {Math.round(snek_counter)}
+          </Text>
+          <Text style={styles.counterstats}>
             {currentSnekRate}
             {currentSnekRate === 1 ? ' snek per second' : ' sneks per second'}
           </Text>
         </View>
 
-        <View style={styles.flatlist}>
-          <FlatList
-            data={snek_rewards}
-            style={styles.listcontainer}
-            renderItem={({ item }) => (
-              <TouchableOpacity onPress={() => this._onPressRewards(item)}>
-                <ImageBackground source={{ uri: item.background }}
-                  style={{
-                    width: '100%', height: '100%', flex: 1,
-                  }}
-                  resizeMode="repeat"
-                >
-                  <View style={styles.listcontainer}>
-                    <Text style={styles.item}>{item.title}</Text>
-                    <View style={styles.statscontainer}>
-                      <Text style={styles.statsitem}>
-                        {'Sneks: '}
-                        {item.snekPoints}
-                      </Text>
-                      <Text style={styles.statsitem}>
-                        {'Rate (sneks/s): '}
-                        {item.rate}
-                      </Text>
-                      <Text style={styles.statsitem}>{item.countLabel + itemNumArray[item.id - 1]}</Text>
+        <ImageBackground source={{ uri: 'http://snake-cartoon-images.clipartonline.net/_/rsrc/1467889959504/home/cartoon-snake_6.png?height=320&width=320' }} style={{ width: '100%', height: '100%' }}>
+          <View style={styles.flatlist}>
+            <FlatList
+              data={snek_rewards}
+              style={styles.listcontainer}
+              renderItem={({ item }) => (
+                <TouchableOpacity onPress={() => this._onPressRewards(item)}>
+                  <ImageBackground source={{ uri: item.background }}
+                    style={{
+                      width: '100%', height: '100%', flex: 1,
+                    }}
+                    resizeMode="repeat"
+                  >
+                    <View style={styles.listcontainer}>
+                      <Text style={styles.item}>{item.title}</Text>
+                      <View style={styles.statscontainer}>
+                        <Text style={styles.statsitem}>
+                          {'Sneks: '}
+                          {item.snekPoints}
+                        </Text>
+                        <Text style={styles.statsitem}>
+                          {'Rate (sneks/s): '}
+                          {item.rate}
+                        </Text>
+                        <Text style={styles.statsitem}>{item.countLabel + itemNumArray[item.id - 1]}</Text>
+                      </View>
                     </View>
-                  </View>
-                </ImageBackground>
-              </TouchableOpacity>
-            )}
-          />
-        </View>
+                  </ImageBackground>
+                </TouchableOpacity>
+              )}
+            />
+          </View>
+        </ImageBackground>
       </View>
     );
   }
@@ -370,9 +373,17 @@ const styles = StyleSheet.create({
     fontSize: 30,
   },
 
+  counterstats: {
+    fontSize: 20,
+  },
+
   listcontainer: {
     flexDirection: 'column',
     backgroundColor: 'rgba(255,255,255,.88)',
+  },
+
+  countercontainer: {
+    flexDirection: 'column',
   },
 
   image: {
@@ -386,7 +397,6 @@ const styles = StyleSheet.create({
     paddingRight: 0,
     flex: 1,
     flexDirection: 'column',
-    backgroundColor: 'red',
   },
 
   item: {
