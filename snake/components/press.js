@@ -107,7 +107,7 @@ class Press extends Component {
       this.setState((previousState) => {
         return { snek_counter: previousState.snek_counter + (caseAdd + chimpAdd + sabotageAdd + ibvetAdd + securitizeAdd + djsolAdd + insidertradeAdd + makemarketAdd + mbsAdd + mercerAdd) / 10, clicked: false };
       });
-    }, 250);
+    }, 150);
   }
 
   _onPressCounter() {

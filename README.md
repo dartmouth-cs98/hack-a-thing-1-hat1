@@ -19,7 +19,7 @@ We learned how to work in React Native, using Expo.io on our phones to test the 
 Specifically, we learnt how to use the different touches / button presses and views on React Native.
 
 ## What didn't work
-Animating the snake to pop in random locations was difficult, and it doesn't work as smoothly as we would've liked. Because the page re-renders every 250ms, the animation often gets cut out before it finishes animating. We didn't have time to find a solution for this.
+Animating the snake to pop in random locations was difficult, and it doesn't work as smoothly as we would've liked. Because the page re-renders every 150ms, the animation often gets cut out before it finishes animating. We didn't have time to find a solution for this.
 
 ## Future Ideas
 
