@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {
   StyleSheet, View, Text, Image, TouchableOpacity, FlatList, ImageBackground,
 } from 'react-native';
+import FadeOutView from './FadeOutView';
 
 class Press extends Component {
   constructor(props) {
@@ -20,9 +21,11 @@ class Press extends Component {
       makemarketNum: 0,
       mbsNum: 0,
       mercerNum: 0,
+      clicked: false,
     };
     this._onPressCounter = this._onPressCounter.bind(this);
     this._onPressRewards = this._onPressRewards.bind(this);
+    this.renderItem = this.renderItem.bind(this);
 
     // Toggle the state every second
     setInterval(() => {
@@ -102,21 +105,21 @@ class Press extends Component {
       }
 
       this.setState((previousState) => {
-        return { snek_counter: previousState.snek_counter + (caseAdd + chimpAdd + sabotageAdd + ibvetAdd + securitizeAdd + djsolAdd + insidertradeAdd + makemarketAdd + mbsAdd + mercerAdd) / 10 };
+        return { snek_counter: previousState.snek_counter + (caseAdd + chimpAdd + sabotageAdd + ibvetAdd + securitizeAdd + djsolAdd + insidertradeAdd + makemarketAdd + mbsAdd + mercerAdd) / 10, clicked: false };
       });
-    }, 100);
+    }, 250);
   }
 
   _onPressCounter() {
-    this.setState(prevState => ({ snek_counter: prevState.snek_counter + 1 }));
+    this.setState(prevState => ({ snek_counter: prevState.snek_counter + 1, clicked: true }));
   }
 
   _onPressRewards(item) {
     const { snek_counter } = this.state;
 
     if (snek_counter >= item.snekPoints) {
-      const currSnekPts = snek_counter - item.snekPoints;
-      this.setState(prevState => ({ snek_rewards: prevState.snek_rewards.slice(0, [Math.floor(currSnekPts / 10)]) }));
+      // const currSnekPts = snek_counter - item.snekPoints;
+      this.setState(prevState => ({ snek_rewards: [] }));
 
       if (item.id === 1) {
         this.setState(prevState => ({ snek_counter: prevState.snek_counter - item.snekPoints }));
@@ -152,6 +155,31 @@ class Press extends Component {
     }
   }
 
+  renderItem(item, itemNumArray) {
+    return (
+      <ImageBackground source={{ uri: item.background }}
+        style={{
+          width: '100%', height: '100%', flex: 1,
+        }}
+        resizeMode="repeat"
+      >
+        <View style={styles.listcontainer}>
+          <Text style={styles.item}>{item.title}</Text>
+          <View style={styles.statscontainer}>
+            <Text style={styles.statsitem}>
+              {'Sneks: '}
+              {item.snekPoints}
+            </Text>
+            <Text style={styles.statsitem}>
+              {'Rate (sneks/s): '}
+              {item.rate}
+            </Text>
+            <Text style={styles.statsitem}>{item.countLabel + itemNumArray[item.id - 1]}</Text>
+          </View>
+        </View>
+      </ImageBackground>
+    );
+  }
 
   render() {
     // if (this.state.snek_counter < 10 && this.state.reset_state) {
@@ -172,6 +200,7 @@ class Press extends Component {
       makemarketNum,
       mbsNum,
       mercerNum,
+      clicked,
     } = this.state;
     if (snek_counter > 9 && snek_rewards.length < 1) {
       const interview = {
@@ -299,6 +328,32 @@ class Press extends Component {
     const currentSnekRate = caseNum + 2 * chimpNum + 50 * sabotageNum + 500 * ibvetNum + 5000 * securitizeNum + 10000 * djsolNum + 25000 * insidertradeNum + 100000 * makemarketNum + 1000000 * mbsNum + 100000000 * mercerNum;
     const itemNumArray = [caseNum, chimpNum, sabotageNum, ibvetNum, securitizeNum, djsolNum, insidertradeNum, makemarketNum, mbsNum, mercerNum];
 
+    const snakeX = Math.random() * 60 + 20;
+    const snakeY = Math.random() * 60 + 20;
+    const snakeXString = `${parseInt(snakeX, 10)}%`;
+    const snakeYString = `${parseInt(snakeY, 10)}%`;
+
+    let clickAnimation = '';
+    if (clicked) {
+      clickAnimation = (
+        <FadeOutView style={{
+          position: 'absolute',
+          bottom: snakeXString,
+          right: snakeYString,
+          width: 50,
+          height: 50,
+        }}
+        >
+          <Image
+            style={{ width: 75, height: 75 }}
+            source={require('../assets/snake.png')}
+            resizeMode="contain"
+          />
+        </FadeOutView>
+      );
+      // this.setState(prevState => ({ clicked: false }));
+    }
+
     return (
 
       <View style={styles.container}>
@@ -309,6 +364,7 @@ class Press extends Component {
               source={{ uri: 'http://www.acting-man.com/blog/media/2017/01/donadoll-1024x429.jpg' }}
             />
           </TouchableOpacity>
+          {clickAnimation}
         </View>
 
         <View style={styles.countercontainer}>
@@ -330,27 +386,7 @@ class Press extends Component {
               style={styles.listcontainer}
               renderItem={({ item }) => (
                 <TouchableOpacity onPress={() => this._onPressRewards(item)}>
-                  <ImageBackground source={{ uri: item.background }}
-                    style={{
-                      width: '100%', height: '100%', flex: 1,
-                    }}
-                    resizeMode="repeat"
-                  >
-                    <View style={styles.listcontainer}>
-                      <Text style={styles.item}>{item.title}</Text>
-                      <View style={styles.statscontainer}>
-                        <Text style={styles.statsitem}>
-                          {'Sneks: '}
-                          {item.snekPoints}
-                        </Text>
-                        <Text style={styles.statsitem}>
-                          {'Rate (sneks/s): '}
-                          {item.rate}
-                        </Text>
-                        <Text style={styles.statsitem}>{item.countLabel + itemNumArray[item.id - 1]}</Text>
-                      </View>
-                    </View>
-                  </ImageBackground>
+                  {this.renderItem(item, itemNumArray)}
                 </TouchableOpacity>
               )}
             />
@@ -417,6 +453,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     paddingLeft: 10,
   },
+
 });
 
 export default Press;

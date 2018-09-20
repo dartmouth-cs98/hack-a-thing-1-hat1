@@ -38,6 +38,7 @@
         "no-use-before-define": [2, { "variables": false }],
         "import/no-extraneous-dependencies": 0,
         "camelcase": 0,
+        "global-require": 0,
     },
     "plugins": [
         "react"
