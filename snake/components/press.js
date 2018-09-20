@@ -379,7 +379,7 @@ class Press extends Component {
           </Text>
         </View>
 
-        <ImageBackground source={{ uri: 'http://snake-cartoon-images.clipartonline.net/_/rsrc/1467889959504/home/cartoon-snake_6.png?height=320&width=320' }} style={{ width: '100%', height: '100%' }}>
+        <ImageBackground source={{ uri: 'http://snake-cartoon-images.clipartonline.net/_/rsrc/1467889959504/home/cartoon-snake_6.png?height=320&width=320' }} style={{ width: '100%', height: '100%', flex: 1 }}>
           <View style={styles.flatlist}>
             <FlatList
               data={snek_rewards}
@@ -414,6 +414,7 @@ const styles = StyleSheet.create({
   },
 
   listcontainer: {
+    flex: 1,
     flexDirection: 'column',
     backgroundColor: 'rgba(255,255,255,.88)',
   },
@@ -428,7 +429,7 @@ const styles = StyleSheet.create({
   },
 
   flatlist: {
-    alignSelf: 'stretch',
+    // alignSelf: 'stretch',
     marginLeft: 0,
     paddingRight: 0,
     flex: 1,
