@@ -215,7 +215,7 @@ class Press extends Component {
       const ibvet = {
         id: 4,
         snekPoints: 10000,
-        title: '2y IB Vet',
+        title: 'Two Year IB Veteran',
         countLabel: 'IB Vets: ',
         rate: 500,
         background: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Goldman_Sachs.svg/200px-Goldman_Sachs.svg.png',
