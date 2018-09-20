@@ -219,8 +219,8 @@ class Press extends Component {
       const chimp = {
         id: 2,
         snekPoints: 20,
-        title: 'WSO Senior Chimp',
-        countLabel: 'Senior Chimps: ',
+        title: 'Attain WSO Senior Chimp Status',
+        countLabel: 'Silver Bananas Attained: ',
         rate: 2,
         background: 'https://static1.squarespace.com/static/53adf1a4e4b07a4f011714d8/57c10cb92994ca2851619b9f/57eff43d725e25e9149ec2e4/1475343421903/Wall+Street+Oasis.jpg?format=1000w',
       };
@@ -232,7 +232,7 @@ class Press extends Component {
       const sabotage = {
         id: 3,
         snekPoints: 500,
-        title: 'Sabotage Interview of Friend',
+        title: 'Sabotage Interview of "Friend"',
         countLabel: 'Friends Sabotaged: ',
         rate: 50,
         background: 'https://image.shutterstock.com/image-vector/rejected-red-square-grunge-stamp-260nw-335102924.jpg',
@@ -244,8 +244,8 @@ class Press extends Component {
       const ibvet = {
         id: 4,
         snekPoints: 10000,
-        title: 'Two Year IB Veteran',
-        countLabel: 'IB Vets: ',
+        title: 'Become Two Year IB Veteran',
+        countLabel: 'Live Deals Done: ',
         rate: 500,
         background: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Goldman_Sachs.svg/200px-Goldman_Sachs.svg.png',
       };
