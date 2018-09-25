@@ -21,6 +21,8 @@ class Press extends Component {
       makemarketNum: 0,
       mbsNum: 0,
       mercerNum: 0,
+
+      multiplierRate: 1.5,
       clicked: false,
     };
     this._onPressCounter = this._onPressCounter.bind(this);
@@ -200,12 +202,13 @@ class Press extends Component {
       makemarketNum,
       mbsNum,
       mercerNum,
+      multiplierRate,
       clicked,
     } = this.state;
     if (snek_counter > 9 && snek_rewards.length < 1) {
       const interview = {
         id: 1,
-        snekPoints: 10,
+        snekPoints: 10 * (multiplierRate ** caseNum),
         title: 'Get Case Interview Secrets',
         countLabel: 'Books Purchased: ',
         rate: 1,
@@ -218,7 +221,7 @@ class Press extends Component {
     if (snek_counter > 19 && snek_rewards.length < 2) {
       const chimp = {
         id: 2,
-        snekPoints: 20,
+        snekPoints: 20 * (multiplierRate ** chimpNum),
         title: 'Attain WSO Senior Chimp Status',
         countLabel: 'Silver Bananas Attained: ',
         rate: 2,
@@ -231,7 +234,7 @@ class Press extends Component {
     if (snek_counter > 499 && snek_rewards.length < 3) {
       const sabotage = {
         id: 3,
-        snekPoints: 500,
+        snekPoints: 500 * (multiplierRate ** sabotageNum),
         title: 'Sabotage Interview of "Friend"',
         countLabel: 'Friends Sabotaged: ',
         rate: 50,
@@ -243,7 +246,7 @@ class Press extends Component {
     if (snek_counter > 9999 && snek_rewards.length < 4) {
       const ibvet = {
         id: 4,
-        snekPoints: 10000,
+        snekPoints: 10000 * (multiplierRate ** ibvetNum),
         title: 'Become Two Year IB Veteran',
         countLabel: 'Live Deals Done: ',
         rate: 500,
@@ -255,7 +258,7 @@ class Press extends Component {
     if (snek_counter > 99999 && snek_rewards.length < 5) {
       const securitize = {
         id: 5,
-        snekPoints: 100000,
+        snekPoints: 100000 * (multiplierRate ** securitizeNum),
         title: 'Securitize a Snek Farm',
         countLabel: 'Snek Farms: ',
         rate: 5000,
@@ -267,7 +270,7 @@ class Press extends Component {
     if (snek_counter > 499999 && snek_rewards.length < 6) {
       const djsol = {
         id: 6,
-        snekPoints: 500000,
+        snekPoints: 500000 * (multiplierRate ** djsolNum),
         title: 'Party with DJ Sol',
         countLabel: 'Parties: ',
         rate: 10000,
@@ -279,7 +282,7 @@ class Press extends Component {
     if (snek_counter > 999999 && snek_rewards.length < 7) {
       const insidertrade = {
         id: 7,
-        snekPoints: 1000000,
+        snekPoints: 1000000 * (multiplierRate ** insidertradeNum),
         title: 'Insider Trade with Stevey',
         countLabel: 'Insider Trades: ',
         rate: 25000,
@@ -291,7 +294,7 @@ class Press extends Component {
     if (snek_counter > 12499999 && snek_rewards.length < 8) {
       const makemarket = {
         id: 8,
-        snekPoints: 12500000,
+        snekPoints: 12500000 * (multiplierRate ** makemarketNum),
         title: 'Make Markets with Ken',
         countLabel: 'Markets Made: ',
         rate: 100000,
@@ -303,7 +306,7 @@ class Press extends Component {
     if (snek_counter > 49999999 && snek_rewards.length < 9) {
       const mbs = {
         id: 9,
-        snekPoints: 50000000,
+        snekPoints: 50000000 * (multiplierRate ** mbsNum),
         title: 'Crash Economy with MBSs',
         countLabel: 'Economies Crashed: ',
         rate: 1000000,
@@ -316,7 +319,7 @@ class Press extends Component {
     if (snek_counter > 9999999999 && snek_rewards.length < 10) {
       const mercer = {
         id: 10,
-        snekPoints: 10000000000,
+        snekPoints: 10000000000 * (multiplierRate ** mercerNum),
         title: 'Rig Presidency with Bob Mercer',
         countLabel: 'Presidencies Rigged: ',
         rate: 100000000,
