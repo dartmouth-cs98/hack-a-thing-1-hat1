@@ -205,7 +205,7 @@ class Press extends Component {
       multiplierRate,
       clicked,
     } = this.state;
-    if (snek_counter > 9 && snek_rewards.length < 1) {
+    if (snek_counter > (10 * (multiplierRate ** caseNum) - 1) && snek_rewards.length < 1) {
       const interview = {
         id: 1,
         snekPoints: 10 * (multiplierRate ** caseNum),
@@ -218,7 +218,7 @@ class Press extends Component {
       // this.setState({ reset_state: true });
     }
 
-    if (snek_counter > 19 && snek_rewards.length < 2) {
+    if (snek_counter > (20 * (multiplierRate ** chimpNum) - 1) && snek_rewards.length < 2) {
       const chimp = {
         id: 2,
         snekPoints: 20 * (multiplierRate ** chimpNum),
@@ -231,7 +231,7 @@ class Press extends Component {
       // this.setState({ reset_state: true });
     }
 
-    if (snek_counter > 499 && snek_rewards.length < 3) {
+    if (snek_counter > (500 * (multiplierRate ** sabotageNum) - 1) && snek_rewards.length < 3) {
       const sabotage = {
         id: 3,
         snekPoints: 500 * (multiplierRate ** sabotageNum),
@@ -243,7 +243,7 @@ class Press extends Component {
       this.setState(prevState => ({ snek_rewards: prevState.snek_rewards.concat(sabotage) }));
     }
 
-    if (snek_counter > 9999 && snek_rewards.length < 4) {
+    if (snek_counter > (10000 * (multiplierRate ** ibvetNum) - 1) && snek_rewards.length < 4) {
       const ibvet = {
         id: 4,
         snekPoints: 10000 * (multiplierRate ** ibvetNum),
@@ -255,7 +255,7 @@ class Press extends Component {
       this.setState(prevState => ({ snek_rewards: prevState.snek_rewards.concat(ibvet) }));
     }
 
-    if (snek_counter > 99999 && snek_rewards.length < 5) {
+    if (snek_counter > (100000 * (multiplierRate ** securitizeNum) - 1) && snek_rewards.length < 5) {
       const securitize = {
         id: 5,
         snekPoints: 100000 * (multiplierRate ** securitizeNum),
@@ -267,7 +267,7 @@ class Press extends Component {
       this.setState(prevState => ({ snek_rewards: prevState.snek_rewards.concat(securitize) }));
     }
 
-    if (snek_counter > 499999 && snek_rewards.length < 6) {
+    if (snek_counter > (500000 * (multiplierRate ** djsolNum) - 1) && snek_rewards.length < 6) {
       const djsol = {
         id: 6,
         snekPoints: 500000 * (multiplierRate ** djsolNum),
@@ -279,7 +279,7 @@ class Press extends Component {
       this.setState(prevState => ({ snek_rewards: prevState.snek_rewards.concat(djsol) }));
     }
 
-    if (snek_counter > 999999 && snek_rewards.length < 7) {
+    if (snek_counter > (1000000 * (multiplierRate ** insidertradeNum) - 1) && snek_rewards.length < 7) {
       const insidertrade = {
         id: 7,
         snekPoints: 1000000 * (multiplierRate ** insidertradeNum),
@@ -291,7 +291,7 @@ class Press extends Component {
       this.setState(prevState => ({ snek_rewards: prevState.snek_rewards.concat(insidertrade) }));
     }
 
-    if (snek_counter > 12499999 && snek_rewards.length < 8) {
+    if (snek_counter > (12500000 * (multiplierRate ** makemarketNum) - 1) && snek_rewards.length < 8) {
       const makemarket = {
         id: 8,
         snekPoints: 12500000 * (multiplierRate ** makemarketNum),
@@ -303,7 +303,7 @@ class Press extends Component {
       this.setState(prevState => ({ snek_rewards: prevState.snek_rewards.concat(makemarket) }));
     }
 
-    if (snek_counter > 49999999 && snek_rewards.length < 9) {
+    if (snek_counter > (50000000 * (multiplierRate ** mbsNum) - 1) && snek_rewards.length < 9) {
       const mbs = {
         id: 9,
         snekPoints: 50000000 * (multiplierRate ** mbsNum),
@@ -316,7 +316,7 @@ class Press extends Component {
     }
 
     // god mode
-    if (snek_counter > 9999999999 && snek_rewards.length < 10) {
+    if (snek_counter > (10000000000 * (multiplierRate ** mercerNum) - 1) && snek_rewards.length < 10) {
       const mercer = {
         id: 10,
         snekPoints: 10000000000 * (multiplierRate ** mercerNum),
