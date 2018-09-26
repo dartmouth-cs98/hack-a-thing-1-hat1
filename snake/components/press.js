@@ -10,19 +10,99 @@ class Press extends Component {
     this.state = {
       snek_counter: 0,
       snek_rewards: [],
-      // reset_state: false,
-      caseNum: 0,
-      chimpNum: 0,
-      sabotageNum: 0,
-      ibvetNum: 0,
-      securitizeNum: 0,
-      djsolNum: 0,
-      insidertradeNum: 0,
-      makemarketNum: 0,
-      mbsNum: 0,
-      mercerNum: 0,
-
       multiplierRate: 1.5,
+      purchaseOptions: {
+        interview: {
+          id: 1,
+          caseNum: 0,
+          snekPoints: 10 * (multiplierRate ** caseNum),
+          title: 'Get Case Interview Secrets',
+          countLabel: 'Books Purchased: ',
+          rate: 1,
+          background: 'https://images.gr-assets.com/books/1340744133l/15056959.jpg',
+        },
+        chimp: {
+          id: 2,
+          chimpNum: 0,
+          snekPoints: 20 * (multiplierRate ** chimpNum),
+          title: 'Attain WSO Senior Chimp Status',
+          countLabel: 'Silver Bananas Attained: ',
+          rate: 2,
+          background: 'https://static1.squarespace.com/static/53adf1a4e4b07a4f011714d8/57c10cb92994ca2851619b9f/57eff43d725e25e9149ec2e4/1475343421903/Wall+Street+Oasis.jpg?format=1000w',
+        },
+        sabotage: {
+          id: 3,
+          sabotageNum: 0,
+          snekPoints: 500 * (multiplierRate ** sabotageNum),
+          title: 'Sabotage Interview of "Friend"',
+          countLabel: 'Friends Sabotaged: ',
+          rate: 50,
+          background: 'https://image.shutterstock.com/image-vector/rejected-red-square-grunge-stamp-260nw-335102924.jpg',
+        },
+        ibvet: {
+          id: 4,
+          ibvetNum: 0,
+          snekPoints: 10000 * (multiplierRate ** ibvetNum),
+          title: 'Become Two Year IB Veteran',
+          countLabel: 'Live Deals Done: ',
+          rate: 500,
+          background: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Goldman_Sachs.svg/200px-Goldman_Sachs.svg.png',
+        },
+        securitize: {
+          id: 5,
+          securitizeNum: 0,
+          snekPoints: 100000 * (multiplierRate ** securitizeNum),
+          title: 'Securitize a Snek Farm',
+          countLabel: 'Snek Farms: ',
+          rate: 5000,
+          background: 'https://www.businessdayonline.com/wp-content/uploads/2016/12/snake_farm.jpg',
+        },
+        djsol: {
+          id: 6,
+          djsolNum: 0,
+          snekPoints: 500000 * (multiplierRate ** djsolNum),
+          title: 'Party with DJ Sol',
+          countLabel: 'Parties: ',
+          rate: 10000,
+          background: 'https://nyppagesix.files.wordpress.com/2018/07/dj-goldman-saks.jpg?quality=90&strip=all&w=618&h=410&crop=1',
+        },
+        insidertrade: {
+          id: 7,
+          insidertradeNum: 0,
+          snekPoints: 1000000 * (multiplierRate ** insidertradeNum),
+          title: 'Insider Trade with Stevey',
+          countLabel: 'Insider Trades: ',
+          rate: 25000,
+          background: 'https://image.shutterstock.com/image-vector/vector-illustration-cartoon-thief-260nw-130235285.jpg',
+        },
+        makemarket: {
+          id: 8,
+          makemarketNum: 0,
+          snekPoints: 12500000 * (multiplierRate ** makemarketNum),
+          title: 'Make Markets with Ken',
+          countLabel: 'Markets Made: ',
+          rate: 100000,
+          background: 'https://s3.amazonaws.com/lowres.cartoonstock.com/food-drink-biblical-feeding_of_the_5000-bread-fish-feed_the_5000-jlo0174_low.jpg',
+        },
+        mbs: {
+          id: 9,
+          mbsNum: 0,
+          snekPoints: 50000000 * (multiplierRate ** mbsNum),
+          title: 'Crash Economy with MBSs',
+          countLabel: 'Economies Crashed: ',
+          rate: 1000000,
+          background: 'http://www.internationalinvestment.net/wp-content/uploads/2016/04/MBS-image-740x360.jpg',
+        },
+        mercer: {
+          id: 10,
+          mercerNum: 0,
+          snekPoints: 10000000000 * (multiplierRate ** mercerNum),
+          title: 'Rig Presidency with Bob Mercer',
+          countLabel: 'Presidencies Rigged: ',
+          rate: 100000000,
+          background: 'https://betanews.com/wp-content/uploads/2017/06/cartoon-trump-flag-600x375.jpg',
+        },
+      },
       clicked: false,
     };
     this._onPressCounter = this._onPressCounter.bind(this);
@@ -33,75 +113,66 @@ class Press extends Component {
     setInterval(() => {
       let caseAdd, chimpAdd, sabotageAdd, ibvetAdd, securitizeAdd, djsolAdd, insidertradeAdd, makemarketAdd, mbsAdd, mercerAdd;
       const {
-        caseNum,
-        chimpNum,
-        sabotageNum,
-        ibvetNum,
-        securitizeNum,
-        djsolNum,
-        insidertradeNum,
-        makemarketNum,
-        mbsNum,
-        mercerNum,
+        purchaseOptions,
       } = this.state;
 
-      if (caseNum > 0) {
-        caseAdd = (1 * caseNum);
+      if (purchaseOptions.interview.caseNum > 0) {
+        caseAdd = (1 * purchaseOptions.interview.caseNum);
       } else {
         caseAdd = 0;
       }
 
-      if (chimpNum > 0) {
-        chimpAdd = (2 * chimpNum);
+      if (purchaseOptions.chimp.chimpNum > 0) {
+        chimpAdd = (2 * purchaseOptions.chimp.chimpNum);
       } else {
         chimpAdd = 0;
       }
 
-      if (sabotageNum > 0) {
-        sabotageAdd = (50 * sabotageNum);
+      if (purchaseOptions.sabotage.sabotageNum > 0) {
+        sabotageAdd = (50 * purchaseOptions.sabotage.sabotageNum);
       } else {
         sabotageAdd = 0;
       }
 
-      if (ibvetNum > 0) {
-        ibvetAdd = (500 * ibvetNum);
+      if (purchaseOptions.ibvet.ibvetNum > 0) {
+        ibvetAdd = (500 * purchaseOptions.ibvet.ibvetNum);
       } else {
         ibvetAdd = 0;
       }
 
-      if (securitizeNum > 0) {
-        securitizeAdd = (5000 * securitizeNum);
+      if (purchaseOptions.securitize.securitizeNum > 0) {
+        securitizeAdd = (5000 * purchaseOptions.securitize.securitizeNum);
       } else {
         securitizeAdd = 0;
       }
 
-      if (djsolNum > 0) {
-        djsolAdd = (10000 * djsolNum);
+      if (purchaseOptions.djsol.djsolNum > 0) {
+        djsolAdd = (10000 * purchaseOptions.djsol.djsolNum);
       } else {
         djsolAdd = 0;
       }
 
-      if (insidertradeNum > 0) {
-        insidertradeAdd = (25000 * insidertradeNum);
+      if (purchaseOptions.insidertrade.insidertradeNum > 0) {
+        insidertradeAdd = (25000 * purchaseOptions.insidertrade.insidertradeNum);
       } else {
         insidertradeAdd = 0;
       }
 
-      if (makemarketNum > 0) {
-        makemarketAdd = (100000 * makemarketNum);
+      if (purchaseOptions.makemarket.makemarketNum > 0) {
+        makemarketAdd = (100000 * purchaseOptions.makemarket.makemarketNum);
       } else {
         makemarketAdd = 0;
       }
 
-      if (mbsNum > 0) {
-        mbsAdd = (1000000 * mbsNum);
+      if (purchaseOptions.mbs.mbsNum > 0) {
+        mbsAdd = (1000000 * purchaseOptions.mbs.mbsNum);
       } else {
         mbsAdd = 0;
       }
 
       // god mode
-      if (mercerNum > 0) {
-        mercerAdd = (100000000 * mercerNum);
+      if (purchaseOptions.mercer.mercerNum > 0) {
+        mercerAdd = (100000000 * purchaseOptions.mercer.mercerNum);
       } else {
         mercerAdd = 0;
       }
@@ -189,147 +260,58 @@ class Press extends Component {
     //   this.setState({ reset_state: false });
     // }
 
+
+    /** Refactor This * */
     const {
       snek_counter,
       snek_rewards,
-      caseNum,
-      chimpNum,
-      sabotageNum,
-      ibvetNum,
-      securitizeNum,
-      djsolNum,
-      insidertradeNum,
-      makemarketNum,
-      mbsNum,
-      mercerNum,
+      purchaseOptions,
       multiplierRate,
       clicked,
     } = this.state;
-    if (snek_counter > (10 * (multiplierRate ** caseNum) - 1) && snek_rewards.length < 1) {
-      const interview = {
-        id: 1,
-        snekPoints: 10 * (multiplierRate ** caseNum),
-        title: 'Get Case Interview Secrets',
-        countLabel: 'Books Purchased: ',
-        rate: 1,
-        background: 'https://images.gr-assets.com/books/1340744133l/15056959.jpg',
-      };
-      this.setState(prevState => ({ snek_rewards: prevState.snek_rewards.concat(interview) }));
-      // this.setState({ reset_state: true });
+
+    if (snek_counter > (10 * (multiplierRate ** purchaseOptions.interview.caseNum) - 1) && snek_rewards.filter(snek => (snek.id === 1))) {
+      this.setState(prevState => ({ snek_rewards: prevState.snek_rewards.concat(purchaseOptions.interview) }));
     }
 
-    if (snek_counter > (20 * (multiplierRate ** chimpNum) - 1) && snek_rewards.length < 2) {
-      const chimp = {
-        id: 2,
-        snekPoints: 20 * (multiplierRate ** chimpNum),
-        title: 'Attain WSO Senior Chimp Status',
-        countLabel: 'Silver Bananas Attained: ',
-        rate: 2,
-        background: 'https://static1.squarespace.com/static/53adf1a4e4b07a4f011714d8/57c10cb92994ca2851619b9f/57eff43d725e25e9149ec2e4/1475343421903/Wall+Street+Oasis.jpg?format=1000w',
-      };
-      this.setState(prevState => ({ snek_rewards: prevState.snek_rewards.concat(chimp) }));
-      // this.setState({ reset_state: true });
+    if (snek_counter > (20 * (multiplierRate ** purchaseOptions.chimp.chimpNum) - 1) && snek_rewards.filter(snek => (snek.id === 2))) {
+      this.setState(prevState => ({ snek_rewards: prevState.snek_rewards.concat(purchaseOptions.chimp) }));
     }
 
-    if (snek_counter > (500 * (multiplierRate ** sabotageNum) - 1) && snek_rewards.length < 3) {
-      const sabotage = {
-        id: 3,
-        snekPoints: 500 * (multiplierRate ** sabotageNum),
-        title: 'Sabotage Interview of "Friend"',
-        countLabel: 'Friends Sabotaged: ',
-        rate: 50,
-        background: 'https://image.shutterstock.com/image-vector/rejected-red-square-grunge-stamp-260nw-335102924.jpg',
-      };
-      this.setState(prevState => ({ snek_rewards: prevState.snek_rewards.concat(sabotage) }));
+    if (snek_counter > (500 * (multiplierRate ** purchaseOptions.sabotage.sabotageNum) - 1) && snek_rewards.filter(snek => (snek.id === 3))) {
+      this.setState(prevState => ({ snek_rewards: prevState.snek_rewards.concat(purchaseOptions.sabotage) }));
     }
 
-    if (snek_counter > (10000 * (multiplierRate ** ibvetNum) - 1) && snek_rewards.length < 4) {
-      const ibvet = {
-        id: 4,
-        snekPoints: 10000 * (multiplierRate ** ibvetNum),
-        title: 'Become Two Year IB Veteran',
-        countLabel: 'Live Deals Done: ',
-        rate: 500,
-        background: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Goldman_Sachs.svg/200px-Goldman_Sachs.svg.png',
-      };
-      this.setState(prevState => ({ snek_rewards: prevState.snek_rewards.concat(ibvet) }));
+    if (snek_counter > (10000 * (multiplierRate ** purchaseOptions.ibvet.ibvetNum) - 1) && snek_rewards.filter(snek => (snek.id === 4))) {
+      this.setState(prevState => ({ snek_rewards: prevState.snek_rewards.concat(purchaseOptions.ibvet) }));
     }
 
-    if (snek_counter > (100000 * (multiplierRate ** securitizeNum) - 1) && snek_rewards.length < 5) {
-      const securitize = {
-        id: 5,
-        snekPoints: 100000 * (multiplierRate ** securitizeNum),
-        title: 'Securitize a Snek Farm',
-        countLabel: 'Snek Farms: ',
-        rate: 5000,
-        background: 'https://www.businessdayonline.com/wp-content/uploads/2016/12/snake_farm.jpg',
-      };
-      this.setState(prevState => ({ snek_rewards: prevState.snek_rewards.concat(securitize) }));
+    if (snek_counter > (100000 * (multiplierRate ** purchaseOptions.securitize.securitizeNum) - 1) && snek_rewards.length < 5) {
+      this.setState(prevState => ({ snek_rewards: prevState.snek_rewards.concat(purchaseOptions.securitize) }));
     }
 
-    if (snek_counter > (500000 * (multiplierRate ** djsolNum) - 1) && snek_rewards.length < 6) {
-      const djsol = {
-        id: 6,
-        snekPoints: 500000 * (multiplierRate ** djsolNum),
-        title: 'Party with DJ Sol',
-        countLabel: 'Parties: ',
-        rate: 10000,
-        background: 'https://nyppagesix.files.wordpress.com/2018/07/dj-goldman-saks.jpg?quality=90&strip=all&w=618&h=410&crop=1',
-      };
+    if (snek_counter > (500000 * (multiplierRate ** purchaseOptions.djsol.djsolNum) - 1) && snek_rewards.length < 6) {
       this.setState(prevState => ({ snek_rewards: prevState.snek_rewards.concat(djsol) }));
     }
 
-    if (snek_counter > (1000000 * (multiplierRate ** insidertradeNum) - 1) && snek_rewards.length < 7) {
-      const insidertrade = {
-        id: 7,
-        snekPoints: 1000000 * (multiplierRate ** insidertradeNum),
-        title: 'Insider Trade with Stevey',
-        countLabel: 'Insider Trades: ',
-        rate: 25000,
-        background: 'https://image.shutterstock.com/image-vector/vector-illustration-cartoon-thief-260nw-130235285.jpg',
-      };
+    if (snek_counter > (1000000 * (multiplierRate ** purchaseOptions.insidertrade.insidertradeNum) - 1) && snek_rewards.length < 7) {
       this.setState(prevState => ({ snek_rewards: prevState.snek_rewards.concat(insidertrade) }));
     }
 
-    if (snek_counter > (12500000 * (multiplierRate ** makemarketNum) - 1) && snek_rewards.length < 8) {
-      const makemarket = {
-        id: 8,
-        snekPoints: 12500000 * (multiplierRate ** makemarketNum),
-        title: 'Make Markets with Ken',
-        countLabel: 'Markets Made: ',
-        rate: 100000,
-        background: 'https://s3.amazonaws.com/lowres.cartoonstock.com/food-drink-biblical-feeding_of_the_5000-bread-fish-feed_the_5000-jlo0174_low.jpg',
-      };
+    if (snek_counter > (12500000 * (multiplierRate ** purchaseOptions.makemarket.makemarketNum) - 1) && snek_rewards.length < 8) {
       this.setState(prevState => ({ snek_rewards: prevState.snek_rewards.concat(makemarket) }));
     }
 
-    if (snek_counter > (50000000 * (multiplierRate ** mbsNum) - 1) && snek_rewards.length < 9) {
-      const mbs = {
-        id: 9,
-        snekPoints: 50000000 * (multiplierRate ** mbsNum),
-        title: 'Crash Economy with MBSs',
-        countLabel: 'Economies Crashed: ',
-        rate: 1000000,
-        background: 'http://www.internationalinvestment.net/wp-content/uploads/2016/04/MBS-image-740x360.jpg',
-      };
+    if (snek_counter > (50000000 * (multiplierRate ** purchaseOptions.mbs.mbsNum) - 1) && snek_rewards.length < 9) {
       this.setState(prevState => ({ snek_rewards: prevState.snek_rewards.concat(mbs) }));
     }
 
-    // god mode
-    if (snek_counter > (10000000000 * (multiplierRate ** mercerNum) - 1) && snek_rewards.length < 10) {
-      const mercer = {
-        id: 10,
-        snekPoints: 10000000000 * (multiplierRate ** mercerNum),
-        title: 'Rig Presidency with Bob Mercer',
-        countLabel: 'Presidencies Rigged: ',
-        rate: 100000000,
-        background: 'https://betanews.com/wp-content/uploads/2017/06/cartoon-trump-flag-600x375.jpg',
-      };
+    if (snek_counter > (10000000000 * (multiplierRate ** purchaseOptions.mercer.mercerNum) - 1) && snek_rewards.length < 10) {
       this.setState(prevState => ({ snek_rewards: prevState.snek_rewards.concat(mercer) }));
     }
 
-    const currentSnekRate = caseNum + 2 * chimpNum + 50 * sabotageNum + 500 * ibvetNum + 5000 * securitizeNum + 10000 * djsolNum + 25000 * insidertradeNum + 100000 * makemarketNum + 1000000 * mbsNum + 100000000 * mercerNum;
-    const itemNumArray = [caseNum, chimpNum, sabotageNum, ibvetNum, securitizeNum, djsolNum, insidertradeNum, makemarketNum, mbsNum, mercerNum];
+    const currentSnekRate = purchaseOptions.interview.caseNum + 2 * purchaseOptions.chimp.chimpNum + 50 * purchaseOptions.sabotage.sabotageNum + 500 * purchaseOptions.ibvet.ibvetNum + 5000 * purchaseOptions.securitize.securitizeNum + 10000 * purchaseOptions.djsol.djsolNum + 25000 * purchaseOptions.insidertrade.insidertradeNum + 100000 * purchaseOptions.makemarket.makemarketNum + 1000000 * purchaseOptions.mbs.mbsNum + 100000000 * purchaseOptions.mercer.mercerNum;
+    const itemNumArray = [purchaseOptions.interview.caseNum, purchaseOptions.chimp.chimpNum, purchaseOptions.sabotage.sabotageNum, purchaseOptions.ibvet.ibvetNum, purchaseOptions.securitize.securitizeNum, purchaseOptions.djsol.djsolNum, purchaseOptions.insidertrade.insidertradeNum, purchaseOptions.makemarket.makemarketNum, purchaseOptions.mbs.mbsNum, purchaseOptions.mercer.mercerNum];
 
     const snakeX = Math.random() * 60 + 20;
     const snakeY = Math.random() * 60 + 20;
