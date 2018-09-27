@@ -182,7 +182,14 @@ class Press extends Component {
   }
 
   renderItem(item) {
-    const { multiplierRate } = this.state;
+    const { multiplierRate, snek_counter } = this.state;
+
+    let titleStyle = styles.item;
+    let statsStyle = styles.statsitem;
+    if (snek_counter < item.snekPoints * (multiplierRate ** item.num)) {
+      titleStyle = styles.itemGray;
+      statsStyle = styles.statsitemGray;
+    }
     return (
       <ImageBackground source={{ uri: item.background }}
         style={{
@@ -191,17 +198,17 @@ class Press extends Component {
         resizeMode="repeat"
       >
         <View style={styles.listcontainer}>
-          <Text style={styles.item}>{item.title}</Text>
+          <Text style={titleStyle}>{item.title}</Text>
           <View style={styles.statscontainer}>
-            <Text style={styles.statsitem}>
+            <Text style={statsStyle}>
               {'Sneks: '}
               {this.getNumAbbreviation(item.snekPoints * (multiplierRate ** item.num), 3)}
             </Text>
-            <Text style={styles.statsitem}>
+            <Text style={statsStyle}>
               {'Rate (sneks/s): '}
               {this.getNumAbbreviation(item.rate, 3)}
             </Text>
-            <Text style={styles.statsitem}>{item.countLabel + this.getNumAbbreviation(item.num, 3)}</Text>
+            <Text style={statsStyle}>{item.countLabel + this.getNumAbbreviation(item.num, 3)}</Text>
           </View>
         </View>
       </ImageBackground>
@@ -349,6 +356,22 @@ const styles = StyleSheet.create({
   },
 
   statsitem: {
+    fontSize: 12,
+    paddingLeft: 10,
+  },
+
+  itemGray: {
+    color: 'rgb(160, 160, 160)',
+    padding: 10,
+    fontSize: 18,
+    height: 44,
+    flex: 1,
+    flexWrap: 'wrap',
+    fontWeight: 'bold',
+  },
+
+  statsitemGray: {
+    color: 'rgb(160, 160, 160)',
     fontSize: 12,
     paddingLeft: 10,
   },
