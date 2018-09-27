@@ -23,16 +23,10 @@ Animating the snake to pop in random locations was difficult, and it doesn't wor
 
 ## Future Ideas
 
-1. Individual Profile
+1. Individual Profile with stats
 2. Status Upgrades (SPG points / Weekends at the Hamptons / House in Greenwich) to be bought with the snake points but does not increase the snek accumulation. Statuses can be shown on the profile page.
-3. Leaderboard of different sneks (viewable profiles)
-4. Snek Battles (Snek eat Snek world / fight and win the other snek's points)
-
 
 ## Hat 2 TO-DO
 
-1. Sign-In page
-2. Individual Profile Page
-3. Host on Heroku
-4. Leaderboard
-5. Publish on App Store
+1. Add a stats page
+2. Publish on App Store
