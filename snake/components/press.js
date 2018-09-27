@@ -184,12 +184,10 @@ class Press extends Component {
     } else if (lifetime_snek_counter < 100000000000) {
       status = 'Black Mamba';
     } else if (lifetime_snek_counter < 10000000000000) {
-      status = 'hello';
-    } else if (lifetime_snek_counter < 1000000000000000) {
       status = 'Psychotic Snek Charm Master';
-    } else if (lifetime_snek_counter < 100000000000000000) {
+    } else if (lifetime_snek_counter < 1000000000000000) {
       status = 'Radioactive Genocidal Snek Dictator';
-    } else if (lifetime_snek_counter < 10000000000000000000) {
+    } else if (lifetime_snek_counter < 100000000000000000) {
       status = 'Plutonium Spewing Snek Lord';
     } else {
       status = 'Omniscient Cosmic Snek Deity';
