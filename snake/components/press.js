@@ -8,6 +8,7 @@ class Press extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      statsView: false,
       snek_counter: 0,
       lifetime_snek_counter: 0,
       multiplierRate: 1.5,
@@ -106,8 +107,10 @@ class Press extends Component {
       clicked: false,
     };
     this.getNumAbbreviation = this.getNumAbbreviation.bind(this);
+    this.getSnekStatus = this.getSnekStatus.bind(this);
     this._onPressCounter = this._onPressCounter.bind(this);
     this._onPressRewards = this._onPressRewards.bind(this);
+    this._onPressStats = this._onPressStats.bind(this);
     this.renderItem = this.renderItem.bind(this);
 
     // interval at which numbers get refreshed
@@ -141,13 +144,13 @@ class Press extends Component {
     if (num < 1000) {
       return num.toFixed(0);
     } else if (num < 1000000) {
-      return `${(num / 1000).toFixed(decDigits)} thousand`;
+      return `${(num / 1000).toFixed(decDigits)}k`;
     } else if (num < 1000000000) {
-      return `${(num / 1000000).toFixed(decDigits)} million`;
+      return `${(num / 1000000).toFixed(decDigits)}M`;
     } else if (num < 1000000000000) {
-      return `${(num / 1000000000).toFixed(decDigits)} billion`;
+      return `${(num / 1000000000).toFixed(decDigits)}Bn`;
     } else if (num < 1000000000000000) {
-      return `${(num / 1000000000000).toFixed(decDigits)} trillion`;
+      return `${(num / 1000000000000).toFixed(decDigits)}Tn`;
     } else if (num < 1000000000000000000) {
       return `${(num / 1000000000000000).toFixed(decDigits)} quadrillion`;
     } else if (num < 1000000000000000000000) {
@@ -167,8 +170,39 @@ class Press extends Component {
     }
   }
 
+  getSnekStatus() {
+    const { lifetime_snek_counter } = this.state;
+    let status = '';
+    if (lifetime_snek_counter < 1000) {
+      status = 'Garden Snek';
+    } else if (lifetime_snek_counter < 100000) {
+      status = 'Rattlesnek';
+    } else if (lifetime_snek_counter < 10000000) {
+      status = 'Tiger Snek';
+    } else if (lifetime_snek_counter < 1000000000) {
+      status = 'King Kobra';
+    } else if (lifetime_snek_counter < 100000000000) {
+      status = 'Black Mamba';
+    } else if (lifetime_snek_counter < 10000000000000) {
+      status = 'hello';
+    } else if (lifetime_snek_counter < 1000000000000000) {
+      status = 'Psychotic Snek Charm Master';
+    } else if (lifetime_snek_counter < 100000000000000000) {
+      status = 'Radioactive Genocidal Snek Dictator';
+    } else if (lifetime_snek_counter < 10000000000000000000) {
+      status = 'Plutonium Spewing Snek Lord';
+    } else {
+      status = 'Omniscient Cosmic Snek Deity';
+    }
+    return status;
+  }
+
   _onPressCounter() {
     this.setState(prevState => ({ snek_counter: prevState.snek_counter + 1, lifetime_snek_counter: prevState.lifetime_snek_counter + 1, clicked: true }));
+  }
+
+  _onPressStats() {
+    this.setState(prevState => ({ statsView: !prevState.statsView }));
   }
 
   _onPressRewards(item) {
@@ -202,13 +236,13 @@ class Press extends Component {
           <View style={styles.statscontainer}>
             <Text style={statsStyle}>
               {'Sneks: '}
-              {this.getNumAbbreviation(item.snekPoints * (multiplierRate ** item.num), 3)}
+              {this.getNumAbbreviation(item.snekPoints * (multiplierRate ** item.num), 1)}
             </Text>
             <Text style={statsStyle}>
-              {'Rate (sneks/s): '}
-              {this.getNumAbbreviation(item.rate, 3)}
+              {'Rate: '}
+              {this.getNumAbbreviation(item.rate, 0)}
             </Text>
-            <Text style={statsStyle}>{item.countLabel + this.getNumAbbreviation(item.num, 3)}</Text>
+            <Text style={statsStyle}>{item.countLabel + this.getNumAbbreviation(item.num, 1)}</Text>
           </View>
         </View>
       </ImageBackground>
@@ -222,6 +256,7 @@ class Press extends Component {
       lifetime_snek_counter,
       purchaseOptions,
       clicked,
+      statsView,
     } = this.state;
 
     let displayPurchaseOptions = [];
@@ -259,63 +294,116 @@ class Press extends Component {
       // this.setState(prevState => ({ clicked: false }));
     }
 
-    return (
-
-      <View style={styles.container}>
-        <View>
-          <TouchableOpacity onPress={this._onPressCounter}>
-            <Image
-              style={styles.image}
-              source={{ uri: 'http://www.acting-man.com/blog/media/2017/01/donadoll-1024x429.jpg' }}
-            />
-          </TouchableOpacity>
-          {clickAnimation}
-        </View>
-
-        <View style={styles.countercontainer}>
-          <Text style={styles.counter}>
-            Snekiness:
-            {' '}
-            {this.getNumAbbreviation(snek_counter, 3)}
-          </Text>
-          <Text style={styles.counterstats}>
-            {this.getNumAbbreviation(currentSnekRate, 3)}
-            {currentSnekRate === 1 ? ' snek per second' : ' sneks per second'}
-          </Text>
-        </View>
-
-        <ImageBackground source={{ uri: 'http://snake-cartoon-images.clipartonline.net/_/rsrc/1467889959504/home/cartoon-snake_6.png?height=320&width=320' }} style={{ width: '100%', height: '100%', flex: 1 }}>
-          <View style={styles.flatlist}>
-            <FlatList
-              data={displayPurchaseOptions}
-              style={styles.listcontainer}
-              renderItem={({ item }) => (
-                <TouchableOpacity onPress={() => this._onPressRewards(item)}>
-                  {this.renderItem(item)}
-                </TouchableOpacity>
-              )}
-            />
+    if (statsView) {
+      return (
+        <View style={styles.container}>
+          <View>
+            <TouchableOpacity onPress={this._onPressCounter}>
+              <Image
+                style={styles.image}
+                source={{ uri: 'http://www.acting-man.com/blog/media/2017/01/donadoll-1024x429.jpg' }}
+              />
+            </TouchableOpacity>
+            {clickAnimation}
           </View>
-        </ImageBackground>
-      </View>
-    );
+
+          <View style={styles.flatlist}>
+            <Text style={styles.snekstatus}>
+              {this.getSnekStatus()}
+            </Text>
+            <Text style={styles.counterstats}>
+              Total Sneks:
+              {' '}
+              {this.getNumAbbreviation(lifetime_snek_counter, 3)}
+            </Text>
+            <Text style={styles.counterstats}>
+              Current Sneks:
+              {' '}
+              {this.getNumAbbreviation(snek_counter, 3)}
+            </Text>
+            <Text style={styles.counterstats}>
+              {'Snek rate: '}
+              {this.getNumAbbreviation(currentSnekRate, 1)}
+              {currentSnekRate === 1 ? ' snek per second' : ' sneks per second'}
+            </Text>
+            <TouchableOpacity onPress={() => this._onPressStats()} style={styles.listcontainer}>
+              <Text style={styles.exitstatslabel}> Exit </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+
+      );
+    } else {
+      return (
+        <View style={styles.container}>
+          <View>
+            <TouchableOpacity onPress={this._onPressCounter}>
+              <Image
+                style={styles.image}
+                source={{ uri: 'http://www.acting-man.com/blog/media/2017/01/donadoll-1024x429.jpg' }}
+              />
+            </TouchableOpacity>
+            {clickAnimation}
+          </View>
+
+          <View style={styles.countercontainer}>
+            <Text style={styles.counter}>
+              Snekiness:
+              {' '}
+              {this.getNumAbbreviation(snek_counter, 3)}
+            </Text>
+            <Text style={styles.counterstats}>
+              {this.getNumAbbreviation(currentSnekRate, 1)}
+              {currentSnekRate === 1 ? ' snek per second' : ' sneks per second'}
+            </Text>
+            <TouchableOpacity onPress={() => this._onPressStats()}>
+              <Text style={styles.statslabel}> Status </Text>
+            </TouchableOpacity>
+          </View>
+
+          <ImageBackground source={{ uri: 'http://snake-cartoon-images.clipartonline.net/_/rsrc/1467889959504/home/cartoon-snake_6.png?height=320&width=320' }} style={{ width: '100%', height: '100%', flex: 1 }}>
+            <View style={styles.flatlist}>
+              <FlatList
+                data={displayPurchaseOptions}
+                style={styles.listcontainer}
+                renderItem={({ item }) => (
+                  <TouchableOpacity onPress={() => this._onPressRewards(item)}>
+                    {this.renderItem(item)}
+                  </TouchableOpacity>
+                )}
+              />
+            </View>
+          </ImageBackground>
+        </View>
+      );
+    }
   }
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
     paddingTop: 30,
   },
 
   counter: {
     fontWeight: 'bold',
     fontSize: 25,
+    alignSelf: 'center',
+  },
+
+  snekstatus: {
+    fontWeight: 'bold',
+    fontSize: 40,
+    alignSelf: 'center',
+    textAlign: 'center',
+    paddingTop: 15,
+    paddingBottom: 15,
   },
 
   counterstats: {
     fontSize: 20,
+    alignSelf: 'center',
   },
 
   listcontainer: {
@@ -358,6 +446,27 @@ const styles = StyleSheet.create({
   statsitem: {
     fontSize: 12,
     paddingLeft: 10,
+  },
+
+  statslabel: {
+    fontSize: 18,
+    padding: 10,
+    borderRadius: 4,
+    borderWidth: 0.5,
+    margin: 10,
+    width: 80,
+    alignSelf: 'center',
+  },
+
+  exitstatslabel: {
+    fontSize: 18,
+    padding: 10,
+    borderRadius: 4,
+    borderWidth: 0.5,
+    margin: 10,
+    marginTop: 30,
+    width: 60,
+    alignSelf: 'center',
   },
 
   itemGray: {
