@@ -325,7 +325,7 @@ class Press extends Component {
               {currentSnekRate === 1 ? ' snek per second' : ' sneks per second'}
             </Text>
             <TouchableOpacity onPress={() => this._onPressStats()} style={styles.listcontainer}>
-              <Text style={styles.exitstatslabel}> Exit </Text>
+              <Text style={styles.exitstatslabel}> Back </Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -463,7 +463,7 @@ const styles = StyleSheet.create({
     borderWidth: 0.5,
     margin: 10,
     marginTop: 30,
-    width: 60,
+    width: 70,
     alignSelf: 'center',
   },
 
