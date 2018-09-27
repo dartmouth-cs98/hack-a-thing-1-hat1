@@ -112,6 +112,36 @@ class Press extends Component {
     }, 150);
   }
 
+  getNumAbbreviation(num) {
+    if (num < 1000) {
+      return num;
+    } else if (num < 1000000) {
+      return `${(num / 1000).toFixed(3)} thousand`;
+    } else if (num < 1000000000) {
+      return `${(num / 1000000).toFixed(3)} million`;
+    } else if (num < 1000000000000) {
+      return `${(num / 1000000000).toFixed(3)} billion`;
+    } else if (num < 1000000000000000) {
+      return `${(num / 1000000000000).toFixed(3)} trillion`;
+    } else if (num < 1000000000000000000) {
+      return `${(num / 1000000000000000).toFixed(3)} quadrillion`;
+    } else if (num < 1000000000000000000000) {
+      return `${(num / 1000000000000000000).toFixed(3)} quintillion`;
+    } else if (num < 1000000000000000000000000) {
+      return `${(num / 1000000000000000000000).toFixed(3)} sextillion`;
+    } else if (num < 1000000000000000000000000000) {
+      return `${(num / 1000000000000000000000000).toFixed(3)} septillion`;
+    } else if (num < 1000000000000000000000000000000) {
+      return `${(num / 1000000000000000000000000000).toFixed(3)} octillion`;
+    } else if (num < 1000000000000000000000000000000000) {
+      return `${(num / 1000000000000000000000000000000).toFixed(3)} nonillion`;
+    } else if (num < 1000000000000000000000000000000000000) {
+      return `${(num / 1000000000000000000000000000000000).toFixed(3)} decillion`;
+    } else {
+      return 'Too many';
+    }
+  }
+
   _onPressCounter() {
     this.setState(prevState => ({ snek_counter: prevState.snek_counter + 1, clicked: true }));
   }
