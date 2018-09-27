@@ -304,7 +304,7 @@ const styles = StyleSheet.create({
 
   counter: {
     fontWeight: 'bold',
-    fontSize: 30,
+    fontSize: 25,
   },
 
   counterstats: {
